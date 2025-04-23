@@ -2043,13 +2043,15 @@ document.addEventListener('click', function(event) {
             
             switch(social) {
                 case 'whatsapp':
-                    shareUrl = `<a href="https://wa.me/?text=اكتشف هذا الرابط: https://aaamo-4.vercel.app/" target="_blank">مشاركة عبر واتساب</a>(title + " " + url)}`;
+                    shareUrl =   `https://wa.me/?text=${encodeURIComponent(title + " " + url)}`; 
                     break;
                 case 'telegram':
-                    shareUrl = `<a href="https://t.me/share/url?url=https://aaamo-4.vercel.app/&text=اكتشف هذا الرابط" target="_blank">مشاركة عبر تيليجرام</a>}`;
+                    shareUrl =  `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`;
+            
                     break;
                 case 'twitter':
-                    shareUrl = `<a href="https://twitter.com/intent/tweet?url=https://aaamo-4.vercel.app/&text=اكتشف_هذا_الرابط}`;
+                    shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
+        
                     break;
             }
             
