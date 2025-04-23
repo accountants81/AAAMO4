@@ -1,0 +1,2120 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نَجَاتُكَ بِيَدِكَ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link // قائمة النصائح اليومية (30 نصيحة)
+ rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+ :root {
+            --primary-color: #2E8B57;
+            --secondary-color: #3CB371;
+            --dark-color: #111;
+            --light-color: #f5f5f5;
+            --text-color: #333;
+            --white: #fff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }#ffffff
+/* تنسيق عام لكل قسم */
+.category {
+    border-right: 4px solid var(--section-color);
+    background-color: var(--section-light);
+    transition: all 0.4s ease;
+}
+
+.category:hover {
+    background-color: white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.category h2 {
+    color: var(--section-color);
+    padding-bottom: 0.5rem;
+    border-bottom: 2px dashed var(--section-color);
+}
+
+/* تعديلات للأزرار داخل كل قسم */
+.category button {
+    background-color: var(--section-color);
+    color: white;
+}
+
+.category button:hover {
+    background-color: var(--dark-color);
+}
+/* أنماط زر النصيحة اليومية */
+#daily-tip-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+#daily-tip-btn:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-3px);
+}
+
+#daily-tip-btn span.tip-text {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    #daily-tip-btn span.tip-text {
+        display: inline;
+    }
+}
+
+/* أنماط حاوية النصيحة */
+.tip-container {
+    position: fixed;
+    bottom: 80px;
+    left: 20px;
+    width: calc(100% - 40px);
+    max-width: 400px;
+    background-color: var(--dark-color);
+    border: 2px solid var(--primary-color);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    z-index: 1001;
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.tip-container button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tip-container button:hover {
+    background-color: var(--secondary-color);
+}
+
+#daily-tip-content {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--white);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #000;
+            color: var(--white);
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        /* شريط التنقل العلوي المعدل */
+        .navbar {
+            background-color: var(--primary-color);
+            padding: 0.8rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .navbar a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .navbar a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .navbar a.active {
+            background-color: rgba(255, 255, 255, 0.3);
+            font-weight: bold;
+        }
+
+        /* شريط الإشعارات المعدل */
+        .notification-bar {
+            background-color: #222;
+            color: var(--white);
+            padding: 0.5rem;
+            font-size: 0.9rem;
+            border-bottom: 1px solid var(--primary-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            max-height: 40px;
+            overflow: hidden;
+        }
+
+        .notification-bar.expanded {
+            max-height: 200px;
+            padding: 1rem;
+        }
+
+        .notification-content {
+            display: none;
+        }
+
+        .notification-bar.expanded .notification-content {
+            display: block;
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid #444;
+        }
+
+        .notification-toggle {
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        header {
+            background-color: var(--dark-color);
+            color: var(--white);
+            padding: 2rem 0;
+            box-shadow: var(--shadow);
+            background-image: linear-gradient(to right, #000, #2E8B57, #000);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            color: var(--secondary-color);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background-color: var(--dark-color);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            border: 1px solid #2E8B57;
+        }
+
+        .category {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background-color: #222;
+            border-radius: 8px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            border-right: 4px solid var(--primary-color);
+        }
+
+        .category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+            background-color: #1a1a1a;
+        }
+
+        .category h2 {
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+            font-size: 1.8rem;
+        }
+
+        .category h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary-color);
+            animation: underline 2s infinite;
+        }
+
+        @keyframes underline {
+            0% { width: 0; }
+            50% { width: 100%; }
+            100% { width: 0; }
+        }
+
+        .category p {
+            font-size: 1.1rem;
+            color: #ddd;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            text-align: right;
+        }
+
+        .counter {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1.5rem 0;
+            gap: 1rem;
+        }
+
+        .counter button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: var(--transition);
+            min-width: 40px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .counter button:hover {
+            background-color: var(--secondary-color);
+            transform: scale(1.1);
+        }
+
+        .counter span {
+            font-size: 1.3rem;
+            font-weight: bold;
+            min-width: 50px;
+            display: inline-block;
+            color: var(--secondary-color);
+        }
+
+        /* أنماط زر العودة لأعلى */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: var(--secondary-color);
+            transform: scale(1.1);
+        }
+
+        /* إشعار الإكمال */
+        .completion-notification {
+            background-color: #2E8B57;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            font-size: 1.2rem;
+            animation: fadeInOut 3s forwards;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateY(20px); }
+            20% { opacity: 1; transform: translateY(0); }
+            80% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-20px); }
+        }
+
+        /* التأكيد على عدد المرات */
+        .times {
+            color: var(--secondary-color);
+            font-weight: bold;
+            font-size: 1.2em;
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                gap: 0.3rem;
+                padding: 0.5rem;
+            }
+            
+            .navbar a {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .container {
+                padding: 1rem;
+                margin: 1rem;
+            }
+            
+            .category {
+                padding: 1rem;
+            }
+            
+            .category h2 {
+                font-size: 1.5rem;
+            }
+            
+            .counter button {
+                padding: 0.3rem 0.8rem;
+                font-size: 1rem;
+            }
+        }/* أنماط الشريط الجانبي المعدل */
+.sidebar {
+    position: fixed;
+    right: -250px; /* تغيير من 0 إلى -250 لإخفائه */
+    top: 0;
+    width: 250px;
+    height: 100vh;
+    background-color: var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem 0;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    overflow-y: auto;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+}
+
+.sidebar.active {
+    right: 0;
+}
+
+.sidebar-item {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    width: calc(100% - 3rem);
+    transition: all 0.3s ease;
+    border-radius: 5px;
+    margin: 0.3rem 0;
+}
+
+.sidebar-icon {
+    font-size: 1.5rem;
+    margin-left: 15px;
+    min-width: 30px;
+    text-align: center;
+}
+
+.sidebar-text {
+    font-size: 1rem;
+    white-space: nowrap;
+}
+
+/* أنماط زر التحكم */
+.sidebar-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 1100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+.sidebar-toggle:hover {
+    background-color: var(--secondary-color);
+    transform: scale(1.1);
+}
+
+/* تعديلات التكيف مع الشريط الجانبي */
+.container {
+    margin-right: 0;
+    transition: margin-right 0.3s ease;
+}
+
+.container.sidebar-active {
+    margin-right: 250px;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+        right: -200px;
+    }
+    
+    .container.sidebar-active {
+        margin-right: 200px;
+    }
+    
+    .sidebar-toggle {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+}
+    </style>
+
+<body>
+<!-- الشريط الجانبي الجديد -->
+<!-- زر التحكم في الشريط الجانبي -->
+<button id="sidebar-toggle" class="sidebar-toggle">☰</button>
+<div class="sidebar">
+    <a href="#morning" class="sidebar-item">
+        <span class="sidebar-icon">🌅</span>
+        <span class="sidebar-text">أذكار الصباح</span>
+    </a>
+    <a href="#evening" class="sidebar-item">
+        <span class="sidebar-icon">🌇</span>
+        <span class="sidebar-text">أذكار المساء</span>
+    </a>
+    <a href="#deceased" class="sidebar-item">
+        <span class="sidebar-icon">🕊️</span>
+        <span class="sidebar-text">دعاء للميت</span>
+    </a>
+    <a href="#sick" class="sidebar-item">
+        <span class="sidebar-icon">🏥</span>
+        <span class="sidebar-text">دعاء للمريض</span>
+    </a>
+    <a href="#tasbeeh" class="sidebar-item">
+        <span class="sidebar-icon">📿</span>
+        <span class="sidebar-text">السبحة الإلكترونية</span>
+    </a>
+    <a href="#daily-benefits" class="sidebar-item">
+        <span class="sidebar-icon">💎</span>
+        <span class="sidebar-text"> </span>كنوز يومية من السنه
+        </span>
+    </a>
+    <a href="#links" class="sidebar-item">
+        <span class="sidebar-icon">🔗</span>
+        <span class="sidebar-text">مصادر ومراجع إسلامية</span>
+    </a>
+    <a href="#duas" class="sidebar-item">
+        <span class="sidebar-icon">🙏</span>
+        <span class="sidebar-text">أدعية متنوعة</span>
+    </a>
+</div>
+    <!-- شريط الإشعارات المعدل -->
+    <div class="notification-bar" onclick="toggleNotifications()">
+        <div class="notification-toggle">إشعارات الموقع (اضغط للتوسيع/التصغير)</div>
+        <div class="notification-content">
+            <p>مرحباً بكم في نَجَاتُكَ بِيَدِكَ، يمكنكم تصفح الأذكار والأدعية حسب الأقسام المختلفة.</p>
+            <p>اضغط على أي قسم في القائمة للانتقال إليه مباشرة.</p>
+        </div>
+    </div>
+
+    <!-- زر العودة لأعلى -->
+    <div class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        ↑
+    </div>
+
+    <header>
+        <h1>نَجَاتُكَ بِيَدِكَ</h1>
+    </header>
+
+    <div class="container">
+        <!-- أذكار الصباح -->
+        <div class="category" id="morning">
+            <h2>أذكار الصباح</h2>
+            <p>اللّهُ لاَ إِلَـهَ إِلاَّ هُوَ الْحَيُّ الْقَيُّومُ لاَ تَأْخُذُهُ سِنَةٌ وَلاَ نَوْمٌ لَّهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الأَرْضِ مَن ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلاَّ بِإِذْنِهِ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ وَلاَ يُحِيطُونَ بِشَيْءٍ مِّنْ عِلْمِهِ إِلاَّ بِمَا شَاء وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالأَرْضَ وَلاَ يَؤُودُهُ حِفْظُهُمَا وَهُوَ الْعَلِيُّ الْعَظِيمُ <span class="times">(مرة واحدة)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم
+قُلْ هُوَ ٱللَّهُ أَحَدٌ، ٱللَّهُ ٱلصَّمَدُ، لَمْ يَلِدْ وَلَمْ يُولَدْ، وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌۢ <span class="times">(ثلاث مرات)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم
+قُلْ أَعُوذُ بِرَبِّ ٱلْفَلَقِ، مِن شَرِّ مَا خَلَقَ، وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ، وَمِن شَرِّ ٱلنَّفَّٰثَٰتِ فِى ٱلْعُقَدِ، وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ. <span class="times">(ثلاث مرات)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم
+قُلْ أَعُوذُ بِرَبِّ ٱلنَّاسِ، مَلِكِ ٱلنَّاسِ، إِلَٰهِ ٱلنَّاسِ، مِن شَرِّ ٱلْوَسْوَاسِ ٱلْخَنَّاسِ، ٱلَّذِى يُوَسْوِسُ فِى صُدُورِ ٱلنَّاسِ، مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ. <span class="times">(ثلاث مرات)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>أَصْـبَحْنا وَأَصْـبَحَ المُـلْكُ لله وَالحَمدُ لله ، لا إلهَ إلاّ اللّهُ وَحدَهُ لا شَريكَ لهُ، لهُ المُـلكُ ولهُ الحَمْـد، وهُوَ على كلّ شَيءٍ قدير ، رَبِّ أسْـأَلُـكَ خَـيرَ ما في هـذا اليوم وَخَـيرَ ما بَعْـدَه ، وَأَعـوذُ بِكَ مِنْ شَـرِّ ما في هـذا اليوم وَشَرِّ ما بَعْـدَه، رَبِّ أَعـوذُبِكَ مِنَ الْكَسَـلِ وَسـوءِ الْكِـبَر ، رَبِّ أَعـوذُ بِكَ مِنْ عَـذابٍ في النّـارِ وَعَـذابٍ في القَـبْر <span class="times">(مرة واحدة)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>اللّهـمَّ أَنْتَ رَبِّـي لا إلهَ إلاّ أَنْتَ ، خَلَقْتَنـي وَأَنا عَبْـدُك ، وَأَنا عَلـى عَهْـدِكَ وَوَعْـدِكَ ما اسْتَـطَعْـت ، أَعـوذُبِكَ مِنْ شَـرِّ ما صَنَـعْت ، أَبـوءُ لَـكَ بِنِعْـمَتِـكَ عَلَـيَّ وَأَبـوءُ بِذَنْـبي فَاغْفـِرْ لي فَإِنَّـهُ لا يَغْـفِرُ الذُّنـوبَ إِلاّ أَنْتَ <span class="times">(مرة واحدة)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>رَضيـتُ بِاللهِ رَبَّـاً وَبِالإسْلامِ ديـناً وَبِمُحَـمَّدٍ صلى الله عليه وسلم نَبِيّـاً. <span class="times">(ثلاث مرات)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>اللّهُـمَّ إِنِّـي أَصْبَـحْتُ أُشْـهِدُك ، وَأُشْـهِدُ حَمَلَـةَ عَـرْشِـك ، وَمَلَائِكَتَكَ ، وَجَمـيعَ خَلْـقِك ، أَنَّـكَ أَنْـتَ اللهُ لا إلهَ إلاّ أَنْـتَ وَحْـدَكَ لا شَريكَ لَـك ، وَأَنَّ ُ مُحَمّـداً عَبْـدُكَ وَرَسـولُـك <span class="times">(4 مرات)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>اللّهُـمَّ ما أَصْبَـحَ بي مِـنْ نِعْـمَةٍ أَو بِأَحَـدٍ مِـنْ خَلْـقِك ، فَمِـنْكَ وَحْـدَكَ لا شريكَ لَـك ، فَلَـكَ الْحَمْـدُ وَلَـكَ الشُّكْـر. <span class="times">(مرة واحدة)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>حَسْبِـيَ اللّهُ لا إلهَ إلاّ هُوَ عَلَـيهِ تَوَكَّـلتُ وَهُوَ رَبُّ العَرْشِ العَظـيم. <span class="times">(7 مرات)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>بِسـمِ اللهِ الذي لا يَضُـرُّ مَعَ اسمِـهِ شَيءٌ في الأرْضِ وَلا في السّمـاءِ وَهـوَ السّمـيعُ العَلـيم <span class="times">(ثلاث مرات)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>اللّهُـمَّ بِكَ أَصْـبَحْنا وَبِكَ أَمْسَـينا ، وَبِكَ نَحْـيا وَبِكَ نَمُـوتُ وَإِلَـيْكَ النُّـشُور. <span class="times">(مرة واحدة)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>أَصْبَـحْـنا عَلَى فِطْرَةِ الإسْلاَمِ، وَعَلَى كَلِمَةِ الإِخْلاَصِ، وَعَلَى دِينِ نَبِيِّنَا مُحَمَّدٍ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ، وَعَلَى مِلَّةِ أَبِينَا إبْرَاهِيمَ حَنِيفاً مُسْلِماً وَمَا كَانَ مِنَ المُشْرِكِينَ <span class="times">(مرة واحدة)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>سُبْحـانَ اللهِ وَبِحَمْـدِهِ عَدَدَ خَلْـقِه ، وَرِضـا نَفْسِـه ، وَزِنَـةَ عَـرْشِـه ، وَمِـدادَ كَلِمـاتِـه. <span class="times">(ثلاث مرات)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>اللّهُـمَّ عافِـني في بَدَنـي ، اللّهُـمَّ عافِـني في سَمْـعي ، اللّهُـمَّ عافِـني في بَصَـري ، لا إلهَ إلاّ أَنْـتَ <span class="times">(ثلاث مرات)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>اللّهُـمَّ إِنّـي أَعـوذُ بِكَ مِنَ الْكُـفر ، وَالفَـقْر ، وَأَعـوذُ بِكَ مِنْ عَذابِ القَـبْر ، لا إلهَ إلاّ أَنْـتَ <span class="times">(ثلاث مرات)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>اللّهُـمَّ إِنِّـي أسْـأَلُـكَ العَـفْوَ وَالعـافِـيةَ في الدُّنْـيا وَالآخِـرَة ، اللّهُـمَّ إِنِّـي أسْـأَلُـكَ العَـفْوَ وَالعـافِـيةَ في ديني وَدُنْـيايَ وَأهْـلي وَمالـي ، اللّهُـمَّ اسْتُـرْ عـوْراتي وَآمِـنْ رَوْعاتـي ، اللّهُـمَّ احْفَظْـني مِن بَـينِ يَدَيَّ وَمِن خَلْفـي وَعَن يَمـيني وَعَن شِمـالي ، وَمِن فَوْقـي ، وَأَعـوذُ بِعَظَمَـتِكَ أَن أُغْـتالَ مِن تَحْتـي. <span class="times">(مرة واحدة)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>يَا حَيُّ يَا قيُّومُ بِرَحْمَتِكَ أسْتَغِيثُ أصْلِحْ لِي شَأنِي كُلَّهُ وَلاَ تَكِلْنِي إلَى نَفْسِي طَـرْفَةَ عَيْنٍ. <span class="times">(ثلاث مرات)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>أَصْبَـحْـنا وَأَصْبَـحْ المُـلكُ للهِ رَبِّ العـالَمـين ، اللّهُـمَّ إِنِّـي أسْـأَلُـكَ خَـيْرَ هـذا الـيَوْم ، فَـتْحَهُ ، وَنَصْـرَهُ ، وَنـورَهُ وَبَـرَكَتَـهُ ، وَهُـداهُ ، وَأَعـوذُ بِـكَ مِـنْ شَـرِّ ما فـيهِ وَشَـرِّ ما بَعْـدَه <span class="times">(مرة واحدة)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>اللّهُـمَّ عالِـمَ الغَـيْبِ وَالشّـهادَةِ فاطِـرَ السّماواتِ وَالأرْضِ رَبَّ كـلِّ شَـيءٍ وَمَليـكَه ، أَشْهَـدُ أَنْ لا إِلـهَ إِلاّ أَنْت ، أَعـوذُ بِكَ مِن شَـرِّ نَفْسـي وَمِن شَـرِّ الشَّيْـطانِ وَشِرْكِهِ ، وَأَنْ أَقْتَـرِفَ عَلـى نَفْسـي سوءاً أَوْ أَجُـرَّهُ إِلـى مُسْـلِم. <span class="times">(مرة واحدة)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>أَعـوذُ بِكَلِمـاتِ اللّهِ التّـامّـاتِ مِنْ شَـرِّ ما خَلَـق <span class="times">(ثلاث مرات)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+        </div>
+
+        <!-- أذكار المساء -->
+        <div class="category" id="evening">
+            <h2>أذكار المساء</h2>
+            <p>اللّهُ لاَ إِلَـهَ إِلاَّ هُوَ الْحَيُّ الْقَيُّومُ لاَ تَأْخُذُهُ سِنَةٌ وَلاَ نَوْمٌ لَّهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الأَرْضِ مَن ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلاَّ بِإِذْنِهِ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ وَلاَ يُحِيطُونَ بِشَيْءٍ مِّنْ عِلْمِهِ إِلاَّ بِمَا شَاء وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالأَرْضَ وَلاَ يَؤُودُهُ حِفْظُهُمَا وَهُوَ الْعَلِيُّ الْعَظِيمُ <span class="times">(مرة واحدة)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>آمَنَ الرَّسُولُ بِمَا أُنْزِلَ إِلَيْهِ مِنْ رَبِّهِ وَالْمُؤْمِنُونَ ۚ كُلٌّ آمَنَ بِاللَّهِ وَمَلَائِكَتِهِ وَكُتُبِهِ وَرُسُلِهِ لَا نُفَرِّقُ بَيْنَ أَحَدٍ مِنْ رُسُلِهِ ۚ وَقَالُوا سَمِعْنَا وَأَطَعْنَا ۖ غُفْرَانَكَ رَبَّنَا وَإِلَيْكَ الْمَصِيرُ.  لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا لَهَا مَا كَسَبَتْ وَعَلَيْهَا مَا اكْتَسَبَتْ رَبَّنَا لَا تُؤَاخِذْنَا إِنْ نَّسِينَآ أَوْ أَخْطَأْنَا رَبَّنَا وَلَا تَحْمِلْ عَلَيْنَا إِصْرًا كَمَا حَمَلْتَهُ عَلَى الَّذِينَ مِنْ قَبْلِنَا رَبَّنَا وَلَا تُحَمِّلْنَا مَا لَا طَاقَةَ لَنَا بِهِ وَاعْفُ عَنَّا وَاغْفِرْ لَنَا وَارْحَمْنَا أَنْتَ مَوْلَانَا فَانْصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ <span class="times">(مرة واحدة)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>سُبْحَانَ اللَّهِ وَبِحَمْدِهِ <span class="times">(100 مرة)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم
+قُلْ هُوَ ٱللَّهُ أَحَدٌ، ٱللَّهُ ٱلصَّمَدُ، لَمْ يَلِدْ وَلَمْ يُولَدْ، وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌۢ <span class="times">(ثلاث مرات)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم
+قُلْ أَعُوذُ بِرَبِّ ٱلْفَلَقِ، مِن شَرِّ مَا خَلَقَ، وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ، وَمِن شَرِّ ٱلنَّفَّٰثَٰتِ فِى ٱلْعُقَدِ، وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ. <span class="times">(ثلاث مرات)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم
+قُلْ أَعُوذُ بِرَبِّ ٱلنَّاسِ، مَلِكِ ٱلنَّاسِ، إِلَٰهِ ٱلنَّاسِ، مِن شَرِّ ٱلْوَسْوَاسِ ٱلْخَنَّاسِ، ٱلَّذِى يُوَسْوِسُ فِى صُدُورِ ٱلنَّاسِ، مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ. <span class="times">(ثلاث مرات)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>أمسيـنا وأمسـى المـلك لله والحمد لله ، لا إله إلا الله وحده لا شريك له، له المـلك وله الحمـد، وهو على كل شيء قدير ، رب أسـألـك خـير ما في هـذه اللـيلة وخـير ما بعـدهـا ، وأعـوذ بك من شـر ما في هـذه اللـيلة وشر ما بعـدهـا ، رب أعـوذبك من الكسـل وسـوء الكـبر ، رب أعـوذ بك من عـذاب في النـار وعـذاب في القـبر  <span class="times">(مرة واحدة)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>اللّهـمَّ أَنْتَ رَبِّـي لا إلهَ إلاّ أَنْتَ ، خَلَقْتَنـي وَأَنا عَبْـدُك ، وَأَنا عَلـى عَهْـدِكَ وَوَعْـدِكَ ما اسْتَـطَعْـت ، أَعـوذُبِكَ مِنْ شَـرِّ ما صَنَـعْت ، أَبـوءُ لَـكَ بِنِعْـمَتِـكَ عَلَـيَّ وَأَبـوءُ بِذَنْـبي فَاغْفـِرْ لي فَإِنَّـهُ لا يَغْـفِرُ الذُّنـوبَ إِلاّ أَنْتَ <span class="times">(مرة واحدة)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>رَضيـتُ بِاللهِ رَبَّـاً وَبِالإسْلامِ ديـناً وَبِمُحَـمَّدٍ صلى الله عليه وسلم نَبِيّـاً. <span class="times">(ثلاث مرات)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>اللهـم إنـي أمسيت أشـهدك ، وأشـهد حملـة عـرشـك ، وملائكتك ، وجمـيع خلـقك ، أنـك أنـت الله لا إله إلا أنـت وحـدك لا شريك لـك ، وأن محمـدا عبـدك ورسـولـك. <span class="times">(4 مرات)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>اللهـم ما أمسى بي مـن نعـمة أو بأحـد مـن خلـقك ، فمـنك وحـدك لا شريك لـك ، فلـك الحمـد ولـك الشكـر. <span class="times">(مرة واحدة)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>حسبـي الله لا إله إلا هو علـيه توكـلت وهو رب العرش العظـيم<span class="times">(7 مرات)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>بسـم الله الذي لا يضـر مع اسمـه شيء في الأرض ولا في السمـاء وهـو السمـيع العلـيم <span class="times">(ثلاث مرات)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>اللّهُـمَّ بِكَ أَمْسَـينا وَبِكَ أَصْـبَحْنا، وَبِكَ نَحْـيا وَبِكَ نَمُـوتُ وَإِلَـيْكَ الْمَصِيرُ <span class="times">(مرة واحدة)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>أَمْسَيْنَا عَلَى فِطْرَةِ الإسْلاَمِ، وَعَلَى كَلِمَةِ الإِخْلاَصِ، وَعَلَى دِينِ نَبِيِّنَا مُحَمَّدٍ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ، وَعَلَى مِلَّةِ أَبِينَا إبْرَاهِيمَ حَنِيفاً مُسْلِماً وَمَا كَانَ مِنَ المُشْرِكِينَ. <span class="times">(مرة واحدة)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>سُبْحـانَ اللهِ وَبِحَمْـدِهِ عَدَدَ خَلْـقِه ، وَرِضـا نَفْسِـه ، وَزِنَـةَ عَـرْشِـه ، وَمِـدادَ كَلِمـاتِـه. <span class="times">(ثلاث مرات)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>اللهـم عافـني في بدنـي ، اللهـم عافـني في سمـعي ، اللهـم عافـني في بصـري ، لا إله إلا أنـت <span class="times">(ثلاث مرات)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>اللهـم إنـي أعـوذ بك من الكـفر ، والفـقر ، وأعـوذ بك من عذاب القـبر ، لا إله إلا أنـت <span class="times">(ثلاث مرات)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>اللهـم إنـي أسـألـك العـفو والعـافـية في الدنـيا والآخـرة ، اللهـم إنـي أسـألـك العـفو والعـافـية في ديني ودنـياي وأهـلي ومالـي ، اللهـم استـر عـوراتي وآمـن روعاتـي ، اللهـم احفظـني من بـين يدي ومن خلفـي وعن يمـيني وعن شمـالي ، ومن فوقـي ، وأعـوذ بعظمـتك أن أغـتال من تحتـي. <span class="times">(مرة واحدة)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>يَا حَيُّ يَا قيُّومُ بِرَحْمَتِكَ أسْتَغِيثُ أصْلِحْ لِي شَأنِي كُلَّهُ وَلاَ تَكِلْنِي إلَى نَفْسِي طَـرْفَةَ عَيْنٍ. <span class="times">(ثلاث مرات)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>أَمْسَيْنا وَأَمْسَى الْمُلْكُ للهِ رَبِّ الْعَالَمَيْنِ، اللَّهُمَّ إِنَّي أسْأَلُكَ خَيْرَ هَذَه اللَّيْلَةِ فَتْحَهَا ونَصْرَهَا، ونُوْرَهَا وبَرَكَتهَا، وَهُدَاهَا، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فيهِا وَشَرَّ مَا بَعْدَهَا <span class="times">(مرة واحدة)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>اللهـم عالـم الغـيب والشـهادة فاطـر السماوات والأرض رب كـل شـيء ومليـكه ، أشهـد أن لا إلـه إلا أنت ، أعـوذ بك من شـر نفسـي ومن شـر الشيـطان وشركه ، وأن أقتـرف علـى نفسـي سوءا أو أجـره إلـى مسـلم <span class="times">(مرة واحدة)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+        </div>
+
+        <!-- دعاء للميت مع إضافات جديدة -->
+        <div class="category" id="deceased">
+            <h2>دعاء للميت</h2>
+            <p>اللهم إن كان محسنًا فزد في حسناته، وإن كان مسيئًا فتجاوز عن سيئاته <span class="times">(مرة واحدة)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>اللَّهُمَّ اغْفِرْ لَهُ وَارْحَمْهُ، وَعَافِهِ وَاعْفُ عَنْهُ، وَأَكْرِمْ نُزُلَهُ، وَوَسِّعْ مُدْخَلَهُ، وَاغْسِلْهُ بِالْمَاءِ وَالثَّلْجِ وَالْبَرَدِ، وَنَقِّهِ مِنَ الْخَطَايَا كَمَا يُنَقَّى الثَّوْبُ الْأَبْيَضُ مِنَ الدَّنَسِ <span class="times">(مرة واحدة)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>اللَّهُمَّ، اغْفِرْ له وَارْحَمْهُ، وَاعْفُ عنْه وَعَافِهِ، وَأَكْرِمْ نُزُلَهُ، وَوَسِّعْ مُدْخَلَهُ، وَاغْسِلْهُ بمَاءٍ وَثَلْجٍ وَبَرَدٍ، وَنَقِّهِ مِنَ الخَطَايَا كما يُنَقَّى الثَّوْبُ الأبْيَضُ مِنَ الدَّنَسِ، وَأَبْدِلْهُ دَارًا خَيْرًا مِن دَارِهِ، وَأَهْلًا خَيْرًا مِن أَهْلِهِ، وَزَوْجًا خَيْرًا مِن زَوْجِهِ، وَقِهِ فِتْنَةَ القَبْرِ وَعَذَابَ النَّارِ <span class="times">(مرة واحدة)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>اللَّهمَّ اغْفِرْ لحيِّنا وميِّتِنا وشاهدنا وغائِبنا وصَغيرنا وَكبيرنا وذَكرِنا وأُنثانا اللَّهمَّ مَنْ أحييتَه مِنَّا فأحيِه علَى الإسلامِ ومن تَوَفَّيتَه مِنَّا فتَوفَّهُ علَى الإيمانِ اللَّهمَّ لا تحرمنا أجرَه ولا تُضلَّنا بعدَه <span class="times">(مرة واحدة)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>اللَّهُمَّ أَبْدِلْهُ دَارًا خَيْرًا مِنْ دَارِهِ، وَأَهْلًا خَيْرًا مِنْ أَهْلِهِ، وَزَوْجًا خَيْرًا مِنْ زَوْجِهِ، وَأَدْخِلْهُ الْجَنَّةَ، وَأَعِذْهُ مِنْ عَذَابِ الْقَبْرِ وَعَذَابِ النَّارِ <span class="times">(مرة واحدة)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>اللَّهُمَّ اجْعَلْ قَبْرَهُ رَوْضَةً مِنْ رِيَاضِ الْجَنَّةِ، وَلَا تَجْعَلْهُ حُفْرَةً مِنْ حُفَرِ النَّارِ <span class="times">(مرة واحدة)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+                     
+            <!-- أدعية جديدة للميت -->
+            <p>اللهم املأ قبره بالرَّحْمَةِ والرِّضْوَانِ، وأبدله داراً خيراً من داره، وأهلاً خيراً من أهله، وأدخله الجنة، وأعذه من عذاب القبر وعذاب النار <span class="times">(مرة واحدة)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>اللهم أنزله منزلاً مباركاً، وأنت خير المنزلين، اللهم أنزله منازل الصديقين والشهداء والصالحين <span class="times">(مرة واحدة)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>اللهم اجعل قبره روضة من رياض الجنة، ولا تجعله حفرة من حفر النار، اللهم أفسح له في قبره، ونور له فيه <span class="times">(مرة واحدة)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>اللهم إنه عبدك وابن عبدك وابن أمتك، كان يشهد أن لا إله إلا أنت، وأن محمداً عبدك ورسولك، وأنت أعلم به منا <span class="times">(مرة واحدة)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+        </div>
+
+        <!-- دعاء للمريض مع إضافات جديدة -->
+        <div class="category" id="sick">
+            <h2>دعاء للمريض</h2>
+            <p>اللَّهُمَّ رَبَّ النَّاسِ، أَذْهِبِ الْبَأْسَ، اشْفِهِ وَأَنْتَ الشَّافِي، لَا شِفَاءَ إِلَّا شِفَاؤُكَ، شِفَاءً لَا يُغَادِرُ سَقَمًا <span class="times">(مرة واحدة)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>اللَّهُمَّ اشْفِهِ شِفَاءً لَا يُغَادِرُ سَقَمًا، اللَّهُمَّ اشْفِهِ وَعَافِهِ وَارْحَمْهُ <span class="times">(مرة واحدة)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَافِيَةَ لِهَذَا الْمَرِيضِ، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا يُصِيبُهُ <span class="times">(مرة واحدة)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <!-- أدعية جديدة للمريض -->
+            <p>اللهم اشفه شفاءً لا يغادر سقماً، اللهم أذهب عنه كل ألم ووجع، وارزقه الصحة والعافية <span class="times">(مرة واحدة)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>اللهم يا من تعيد المريض لصحته، وتستجيب دعوة المضطر إذا دعاك، اشفه وعافه واعف عنه <span class="times">(مرة واحدة)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+                        
+            <p>اللهم اشفه وعافه وارحمه، اللهم ألبسه لباس الصحة والعافية، وارزقه القوة والنشاط <span class="times">(مرة واحدة)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>اللهم رب الناس، مذهب البأس، اشفه أنت الشافي، لا شفاء إلا شفاؤك، شفاء لا يغادر سقماً <span class="times">(ثلاث مرات)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+            
+            <p>بسم الله أرقيك من كل شيء يؤذيك، ومن شر كل نفس أو عين حاسد، الله يشفيك، بسم الله أرقيك <span class="times">(ثلاث مرات)</span></p>
+            <div class="counter">
+                <button onclick="decrement(this)">-</button>
+                <span>0</span>
+                <button onclick="increment(this)">+</button>
+            </div>
+        </div>
+
+        <!-- سأكمل باقي الأجزاء في الرسائل التالية -->
+    </div>
+
+    
+    </footer>
+
+    <script>
+      // التحكم في فتح وإغلاق الشريط الجانبي
+const sidebar = document.querySelector('.sidebar');
+const sidebarToggle = document.getElementById('sidebar-toggle');
+const container = document.querySelector('.container');
+
+sidebarToggle.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    container.classList.toggle('sidebar-active');
+    
+    // تغيير أيقونة الزر حسب حالة الشريط
+    if (sidebar.classList.contains('active')) {
+        sidebarToggle.textContent = '✕';
+    } else {
+        sidebarToggle.textContent = '☰';
+    }
+});
+
+// إغلاق الشريط عند النقر خارجها
+document.addEventListener('click', function(event) {
+    if (!sidebar.contains(event.target) && !sidebarToggle.contains(event.target)) {
+        sidebar.classList.remove('active');
+        container.classList.remove('sidebar-active');
+        sidebarToggle.textContent = '☰';
+    }
+});
+        // دالة للزيادة
+        function increment(button) {
+            const counter = button.parentElement.querySelector('span');
+            let count = parseInt(counter.textContent);
+            count++;
+            counter.textContent = count;
+            checkCompletion(counter);
+            
+            // تأثير النقر
+            button.style.transform = 'scale(0.9)';
+            setTimeout(() => {
+                button.style.transform = 'scale(1)';
+            }, 100);
+        }
+
+        // دالة للنقصان
+        function decrement(button) {
+            const counter = button.parentElement.querySelector('span');
+            let count = parseInt(counter.textContent);
+            if (count > 0) {
+                count--;
+                counter.textContent = count;
+                checkCompletion(counter);
+                
+                // تأثير النقر
+                button.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    button.style.transform = 'scale(1)';
+                }, 100);
+            }
+        }
+
+        // دالة للتحقق من اكتمال العدد
+        function checkCompletion(counter) {
+            const targetText = counter.parentElement.previousElementSibling.querySelector('.times').textContent;
+            const target = parseInt(targetText.match(/\d+/)[0]) || 1;
+            
+            if (parseInt(counter.textContent) >= target) {
+                // إظهار تنبيه بصري
+                const completionMsg = document.createElement('div');
+                completionMsg.className = 'completion-notification';
+                completionMsg.textContent = 'تم إكمال التكرار بنجاح! ✓';
+                
+                // إضافة رسالة الإكمال
+                counter.parentElement.parentElement.insertBefore(completionMsg, counter.parentElement.nextSibling);
+                
+                // إخفاء الرسالة بعد 3 ثواني
+                setTimeout(() => {
+                    completionMsg.remove();
+                }, 3000);
+            }
+        }
+
+        // دالة لإظهار/إخفاء الإشعارات
+        function toggleNotifications() {
+            const notificationBar = document.querySelector('.notification-bar');
+            notificationBar.classList.toggle('expanded');
+        }
+
+        // إظهار/إخفاء زر العودة لأعلى
+        const backToTopButton = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+
+        // تأثير ظهور تدريجي للصفحة
+        document.body.style.opacity = '0';
+        setTimeout(() => {
+            document.body.style.transition = 'opacity 0.5s ease';
+            document.body.style.opacity = '1';
+        }, 100);
+    </script>
+</body>
+</html>
+
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نَجَاتُكَ بِيَدِكَ</title>
+    <style>
+        /* أنماط الجزء الثاني المضافة */
+        
+        /* أنماط السبحة الإلكترونية */
+        .tasbeeh-counter {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2rem 0;
+            gap: 1.5rem;
+        }
+
+        .tasbeeh-counter button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .tasbeeh-counter button:hover {
+            background-color: var(--secondary-color);
+            transform: scale(1.1);
+        }
+
+        .tasbeeh-counter span {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+            min-width: 80px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .reset-btn {
+            background-color: #ff4444;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-size: 1.1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: var(--transition);
+            margin: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .reset-btn:hover {
+            background-color: #cc0000;
+            transform: scale(1.05);
+        }
+
+        /* أنماط خيارات التسبيح */
+        .tasbeeh-options {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #1a1a1a;
+            border-radius: 10px;
+            border: 1px solid #2E8B57;
+        }
+        
+        .tasbeeh-options h3 {
+            color: #3CB371;
+            margin-bottom: 15px;
+        }
+        
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        
+        .tasbeeh-option {
+            background-color: #2E8B57;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .tasbeeh-option:hover {
+            background-color: #3CB371;
+            transform: scale(1.03);
+        }
+
+        #current-tasbeeh {
+            margin-top: 20px;
+            font-size: 1.3rem;
+            color: #3CB371;
+        }
+
+        /* أنماط قسم الروابط */
+        .links-section {
+            margin-top: 3rem;
+            padding: 2rem;
+            background-color: #222;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            border: 1px solid #2E8B57;
+        }
+
+        .links-section h2 {
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+            font-size: 1.8rem;
+        }
+        
+        .links-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        .links-section a {
+            display: block;
+            margin: 1rem 0;
+            padding: 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: var(--transition);
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .links-section a:hover {
+            background-color: var(--secondary-color);
+            transform: translateX(-5px) scale(1.02);
+        }
+
+        /* أنماط الفوائد اليومية */
+        .daily-benefit {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .daily-benefit h3 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .daily-benefit p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+
+        .benefit-source {
+            color: #3CB371;
+            font-style: italic;
+            margin-top: 0.5rem;
+        }
+
+        /* أنماط البحث */
+        #search-container {
+            display: none;
+            position: fixed;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background-color: #222;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            border: 1px solid #2E8B57;
+        }
+        
+        #search-input {
+            padding: 10px 15px;
+            border-radius: 5px;
+            border: none;
+            width: 300px;
+            font-size: 1rem;
+            background-color: #333;
+            color: white;
+        }
+        
+        #search-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #2E8B57;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            #search-input {
+                width: 250px;
+            }
+            
+            #search-btn {
+                top: 15px;
+                left: 15px;
+                width: 35px;
+                height: 35px;
+            }
+            
+            .tasbeeh-counter button {
+                width: 60px;
+                height: 60px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- الجزء الثاني من المحتوى -->
+    <div class="container">
+        <!-- السبحة الإلكترونية المحسنة -->
+        <div class="category" id="tasbeeh">
+            <h2>السبحة الإلكترونية</h2>
+            <div class="tasbeeh-counter">
+                <button onclick="incrementTasbeeh()">+</button>
+                <span id="tasbeeh-count">0</span>
+            </div>
+            <button class="reset-btn" onclick="resetTasbeeh()">إعادة الضبط</button>
+            
+            <!-- خيارات التسبيح -->
+            <div class="tasbeeh-options">
+                <h3>اختر نوع التسبيح:</h3>
+                <div class="options-grid">
+                    <button class="tasbeeh-option" onclick="setTasbeehType('سبحان الله')">سبحان الله</button>
+                    <button class="tasbeeh-option" onclick="setTasbeehType('الحمد لله')">الحمد لله</button>
+                    <button class="tasbeeh-option" onclick="setTasbeehType('الله أكبر')">الله أكبر</button>
+                    <button class="tasbeeh-option" onclick="setTasbeehType('لا إله إلا الله')">لا إله إلا الله</button>
+                    <button class="tasbeeh-option" onclick="setTasbeehType('أستغفر الله')">أستغفر الله</button>
+                    <button class="tasbeeh-option" onclick="setTasbeehType('لا حول ولا قوة إلا بالله')">لا حول ولا قوة إلا بالله</button>
+                </div>
+            </div>
+            
+            <div id="current-tasbeeh">التسبيح الحالي: سبحان الله</div>
+        </div>
+
+        <!-- زر عرض ذكر عشوائي -->
+        <button class="random-btn" onclick="showRandomContent()">عرض ذكر عشوائي</button>
+        <p id="random-content"></p>
+
+<div class="links-section">
+    <h2/> كنوز الإسلام</h2>
+    <a href="https://play.google.com/store/apps/details?id=org.goldenquran.freesoft" target="_blank">القرآن الكريم (تطبيق)</a>
+    <a href="https://youtube.com/playlist?list=PLSSxr3Rf2_X2oKwiy4UhzIdj4ACzB6dee&si=IjvcVXmiuOHa4Hep" target="_blank">السيرة النبوية (يوتيوب)</a>
+    <a href="https://youtube.com/@eh_el_moshkla?si=KSDeIg_Q32waEcFi" target="_blank">مجموعة من البودكاست الدينية (إيه المشكلة)</a>
+    <a href="https://t.me/AAAMO2_bot?start=33989d3de6fcecfeed109956ffdf83d4" target="_blank"> صوتيات القران الكريم</a>
+    <a href="https://play.google.com/store/apps/details?id=com.ibrahim.hijricalendar" target="_blank">برنامج التقويم الهجري</a>
+    <a href="https://play.google.com/store/apps/details?id=com.arabiait.belal" target="_blank">برنامج مواقيت الصلاة</a>
+</div>
+        <!-- قسم الروابط المفيدة المعدل -->
+        <div class="links-section" id="links">
+            <h2>روابط إسلامية مفيدة</h2>
+            
+            <h3>القرآن الكريم والتفسير</h3>
+            <a href="https://quran.ksu.edu.sa" target="_blank">(اسلام ويب )</a>
+            <a href="https://www.islamweb.net" target="_blank">تفسير القرآن الكريم (موقع آلوكة)</a>
+            
+            <h3>السنة النبوية</h3>
+            <a href="https://dorar.net" target="_blank">الدرر السنية (أحاديث وأحكام)</a>
+            <a href="https://sunnah.com" target="_blank">موسوعة الحديث النبوي (بالإنجليزية والعربية)</a>
+            
+            <h3>مواقع إسلامية موثوقة</h3>
+            <a href="https://islamqa.info" target="_blank">موقع الإسلام سؤال وجواب</a>
+            <a href="https://binbaz.org.sa" target="_blank">موقع الشيخ ابن باز</a>
+            <a href="https://ar.islamway.net" target="_blank">طريق الإسلام (دروس ومحاضرات)</a>
+        </div>
+        
+        <!-- قسم الفوائد اليومية -->
+        <div class="category" id="daily-benefits">
+            <h2>فوائد يومية</h2>
+            <div class="daily-benefit">
+                <div id="daily-benefit-content">
+                    <h3>فائدة اليوم</h3>
+                    <p>قال رسول الله ﷺ: "من قال سبحان الله وبحمده مئة مرة حطت خطاياه وإن كانت مثل زبد البحر"</p>
+                    <p class="benefit-source">- رواه البخاري ومسلم</p>
+                </div>
+            </div>
+            <button class="random-btn" onclick="loadDailyBenefit()">تحديث الفائدة</button>
+        </div>
+    </div>
+
+    </footer>
+<!-- أضف هذا الزر مكان زر البحث -->
+<button id="daily-tip-btn" onclick="showDailyTip()">
+    <span>💡</span>
+    <span class="tip-text">نصيحة اليوم</span>
+</button>
+
+<!-- أضف هذا العنصر لعرض النصيحة -->
+<div id="daily-tip-container" class="tip-container">
+    <div id="daily-tip-content"></div>
+    <button onclick="showDailyTip()">نصيحة جديدة</button>
+</div>
+    </div>
+
+
+    <script>
+      // قائمة النصائح اليومية (30 نصيحة)
+const dailyTips = [
+    "قال رسول الله ﷺ: 'الكلمة الطيبة صدقة' (رواه البخاري ومسلم)",
+    "قال رسول الله ﷺ: 'تبسمك في وجه أخيك صدقة' (رواه الترمذي)",
+    "قال رسول الله ﷺ: 'من قال سبحان الله وبحمده مئة مرة حطت خطاياه وإن كانت مثل زبد البحر' (رواه البخاري ومسلم)",
+    "قال رسول الله ﷺ: 'لا تحقرن من المعروف شيئاً ولو أن تلقى أخاك بوجه طلق' (رواه مسلم)",
+    "قال رسول الله ﷺ: 'من صلى البردين دخل الجنة' (يعني صلاة الفجر والعصر) (رواه البخاري)",
+    "قال رسول الله ﷺ: 'من استغفر للمؤمنين والمؤمنات كتب الله له بكل مؤمن ومؤمنة حسنة' (رواه الطبراني)",
+    "قال رسول الله ﷺ: 'إن الله يحب العبد التقي الغني الخفي' (رواه مسلم)",
+    "قال رسول الله ﷺ: 'اتق الله حيثما كنت، وأتبع السيئة الحسنة تمحها، وخالق الناس بخلق حسن' (رواه الترمذي)",
+    "قال رسول الله ﷺ: 'من ستر مسلماً ستره الله في الدنيا والآخرة' (رواه مسلم)",
+    "قال رسول الله ﷺ: 'من كان في حاجة أخيه كان الله في حاجته' (رواه البخاري)",
+    "قال رسول الله ﷺ: 'الراحمون يرحمهم الرحمن، ارحموا من في الأرض يرحمكم من في السماء' (رواه أبو داود)",
+    "قال رسول الله ﷺ: 'ما زاد الله عبداً بعفو إلا عزاً' (رواه مسلم)",
+    "قال رسول الله ﷺ: 'الدعاء هو العبادة' (رواه الترمذي)",
+    "قال رسول الله ﷺ: 'من لزم الاستغفار جعل الله له من كل ضيق مخرجاً، ومن كل هم فرجاً، ورزقه من حيث لا يحتسب' (رواه أبو داود)",
+    "قال رسول الله ﷺ: 'صلاة الرجل في جماعة تزيد على صلاته في بيته خمساً وعشرين درجة' (رواه البخاري)",
+    "قال رسول الله ﷺ: 'من قرأ آية الكرسي دبر كل صلاة لم يمنعه من دخول الجنة إلا أن يموت' (رواه النسائي)",
+    "قال رسول الله ﷺ: 'من صلى الفجر في جماعة ثم قعد يذكر الله حتى تطلع الشمس ثم صلى ركعتين كانت له كأجر حجة وعمرة' (رواه الترمذي)",
+    "قال رسول الله ﷺ: 'من قال لا إله إلا الله وحده لا شريك له، له الملك وله الحمد وهو على كل شيء قدير، عشر مرات، كان كمن أعتق أربعة أنفس من ولد إسماعيل' (رواه البخاري)",
+    "قال رسول الله ﷺ: 'من قال حين يصبح وحين يمسي: حسبي الله لا إله إلا هو عليه توكلت وهو رب العرش العظيم، سبع مرات، كفاه الله ما أهمه' (رواه أبو داود)",
+    "قال رسول الله ﷺ: 'من قال: سبحان الله العظيم وبحمده، غرست له نخلة في الجنة' (رواه الترمذي)",
+    "قال رسول الله ﷺ: 'من عاد مريضاً ناداه مناد من السماء: طبت وطاب ممشاك، وتبوأت من الجنة منزلاً' (رواه الترمذي)",
+    "قال رسول الله ﷺ: 'ما من عبد مسلم يدعو لأخيه بظهر الغيب إلا قال الملك: ولك مثل ذلك' (رواه مسلم)",
+    "قال رسول الله ﷺ: 'من نفس عن مؤمن كربة من كرب الدنيا نفس الله عنه كربة من كرب يوم القيامة' (رواه مسلم)",
+    "قال رسول الله ﷺ: 'من سلك طريقاً يلتمس فيه علماً سهل الله له به طريقاً إلى الجنة' (رواه مسلم)",
+    "قال رسول الله ﷺ: 'إن الله لا ينظر إلى صوركم وأموالكم، ولكن ينظر إلى قلوبكم وأعمالكم' (رواه مسلم)",
+    "قال رسول الله ﷺ: 'ما نقصت صدقة من مال، وما زاد الله عبداً بعفو إلا عزاً، وما تواضع أحد لله إلا رفعه الله' (رواه مسلم)",
+    "قال رسول الله ﷺ: 'من صلى علي صلاة صلى الله عليه بها عشراً' (رواه مسلم)",
+    "قال رسول الله ﷺ: 'من دعا إلى هدى كان له من الأجر مثل أجور من تبعه لا ينقص ذلك من أجورهم شيئاً' (رواه مسلم)",
+    "قال رسول الله ﷺ: 'من كان سهلاً هيناً ليناً حرمه الله على النار' (رواه البيهقي)",
+    "قال رسول الله ﷺ: 'إن الله تعالى يقول: أنا عند ظن عبدي بي، وأنا معه إذا ذكرني' (رواه البخاري ومسلم)"
+];
+
+// دالة لعرض نصيحة عشوائية
+function showDailyTip() {
+    const tipContainer = document.getElementById('daily-tip-container');
+    const tipContent = document.getElementById('daily-tip-content');
+    
+    // اختيار نصيحة عشوائية
+    const randomTip = dailyTips[Math.floor(Math.random() * dailyTips.length)];
+    
+    // عرض النصيحة
+    tipContent.innerHTML = randomTip;
+    
+    // إظهار الحاوية
+    tipContainer.style.display = 'block';
+    
+    // إخفاء النصيحة بعد 10 ثواني إذا لم يتفاعل المستخدم
+    setTimeout(() => {
+        if (tipContainer.style.display === 'block') {
+            tipContainer.style.display = 'none';
+        }
+    }, 10000);
+}
+
+// إغلاق النصيحة عند النقر خارجها
+document.addEventListener('click', function(event) {
+    const tipContainer = document.getElementById('daily-tip-container');
+    const tipBtn = document.getElementById('daily-tip-btn');
+    
+    if (!tipContainer.contains(event.target) && !tipBtn.contains(event.target)) {
+        tipContainer.style.display = 'none';
+    }
+});
+        // دالة لتعيين نوع التسبيح
+        let currentTasbeehType = 'سبحان الله';
+        function setTasbeehType(type) {
+            currentTasbeehType = type;
+            document.getElementById('current-tasbeeh').textContent = `التسبيح الحالي: ${type}`;
+            
+            // تأثير عند التحديد
+            const buttons = document.querySelectorAll('.tasbeeh-option');
+            buttons.forEach(btn => {
+                btn.style.backgroundColor = '#2E8B57';
+                btn.style.transform = 'scale(1)';
+            });
+            
+            event.target.style.backgroundColor = '#3CB371';
+            event.target.style.transform = 'scale(1.05)';
+        }
+
+        // دالة لزيادة التسبيحات
+        let tasbeehCount = 0;
+        function incrementTasbeeh() {
+            tasbeehCount++;
+            document.getElementById('tasbeeh-count').textContent = tasbeehCount;
+            
+            // تأثير النقر
+            const button = document.querySelector('.tasbeeh-counter button');
+            button.style.transform = 'scale(0.9)';
+            setTimeout(() => {
+                button.style.transform = 'scale(1)';
+            }, 100);
+            
+            // تغيير لون العداد مؤقتًا
+            const counter = document.getElementById('tasbeeh-count');
+            counter.style.color = '#fff';
+            counter.style.textShadow = '0 0 10px #fff';
+            setTimeout(() => {
+                counter.style.color = '#3CB371';
+                counter.style.textShadow = 'none';
+            }, 200);
+            
+            // إشعار عند الوصول إلى 33 أو 100
+            if (tasbeehCount === 33 || tasbeehCount === 100) {
+                showCompletionNotification(`تم الوصول إلى ${tasbeehCount} تسبيحة!`);
+            }
+        }
+
+        // دالة لإعادة ضبط السبحة
+        function resetTasbeeh() {
+            tasbeehCount = 0;
+            document.getElementById('tasbeeh-count').textContent = tasbeehCount;
+            
+            // تأثير النقر
+            const button = document.querySelector('.reset-btn');
+            button.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                button.style.transform = 'scale(1)';
+            }, 100);
+        }
+
+        // دالة لعرض محتوى عشوائي
+        const contentList = [
+            "أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ",
+            "اللَّهُمَّ بِكَ أَصْبَحْنَا، وَبِكَ أَمْسَيْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ النُّشُورُ",
+            "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ",
+            "اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا، وَرِزْقًا طَيِّبًا، وَعَمَلًا مُتَقَبَّلًا",
+            "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ الْهَمِّ وَالْحَزَنِ، وَأَعُوذُ بِكَ مِنْ الْعَجْزِ وَالْكَسَلِ، وَأَعُوذُ بِكَ مِنْ الْجُبْنِ وَالْبُخْلِ، وَأَعُوذُ بِكَ مِنْ غَلَبَةِ الدَّيْنِ، وَقَهْرِ الرِّجَالِ",
+            "حَسْبِيَ اللَّهُ لَا إِلَهَ إِلَّا هُوَ، عَلَيْهِ تَوَكَّلْتُ، وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ",
+            "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْهُدَى وَالتُّقَى وَالْعَفَافَ وَالْغِنَى",
+            "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ زَوَالِ نِعْمَتِكَ، وَتَحَوُّلِ عَافِيَتِكَ، وَفُجَاءَةِ نِقْمَتِكَ، وَجَمِيعِ سَخَطِكَ",
+            "اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ الْخَيْرِ كُلِّهِ عَاجِلِهِ وَآجِلِهِ مَا عَلِمْتُ مِنْهُ وَمَا لَمْ أَعْلَمْ، وَأَعُوذُ بِكَ مِنْ الشَّرِّ كُلِّهِ عَاجِلِهِ وَآجِلِهِ مَا عَلِمْتُ مِنْهُ وَمَا لَمْ أَعْلَمْ",
+            "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْجَنَّةَ وَأَعُوذُ بِكَ مِنْ النَّارِ"
+        ];
+
+        function showRandomContent() {
+            const randomIndex = Math.floor(Math.random() * contentList.length);
+            const randomContent = document.getElementById('random-content');
+            
+            // تأثير ظهور تدريجي
+            randomContent.style.opacity = '0';
+            setTimeout(() => {
+                randomContent.textContent = contentList[randomIndex];
+                randomContent.style.opacity = '1';
+            }, 300);
+            
+            // تأثير النقر
+            const button = document.querySelector('.random-btn');
+            button.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                button.style.transform = 'scale(1)';
+            }, 100);
+        }
+
+        // دالة لتحميل الفائدة اليومية
+        const dailyBenefits = [
+            {
+                text: "قال رسول الله ﷺ: 'من قال سبحان الله وبحمده مئة مرة حطت خطاياه وإن كانت مثل زبد البحر'",
+                source: "رواه البخاري ومسلم"
+            },
+            {
+                text: "الإكثار من الاستغفار يمحو الذنوب ويزيد الرزق وييسر الأمور",
+                source: "عن النبي ﷺ"
+            },
+            {
+                text: "قراءة آية الكرسي بعد كل صلاة مكتوبة من أسباب حفظ المسلم",
+                source: "رواه البخاري"
+            },
+            {
+                text: "المحافظة على أذكار الصباح والمساء تحفظ المسلم من الشرور وتجلب له الخير",
+                source: "عن النبي ﷺ"
+            },
+            {
+                text: "صلاة ركعتين بخشوع خير من الدنيا وما فيها",
+                source: "رواه مسلم"
+            },
+            {
+                text: "الصدقة تطفئ غضب الرب وتدفع البلاء",
+                source: "رواه الترمذي"
+            },
+            {
+                text: "بر الوالدين من أعظم الأعمال عند الله تعالى",
+                source: "رواه البخاري"
+            },
+            {
+                text: "صيام ثلاثة أيام من كل شهر كصيام الدهر كله",
+                source: "رواه البخاري ومسلم"
+            },
+            {
+                text: "الكلمة الطيبة صدقة، وتبسمك في وجه أخيك صدقة",
+                source: "رواه البخاري"
+            },
+            {
+                text: "حسن الظن بالله من أعظم أسباب تفريج الكرب",
+                source: "عن ابن عباس رضي الله عنهما"
+            }
+        ];
+
+        function loadDailyBenefit() {
+            const randomIndex = Math.floor(Math.random() * dailyBenefits.length);
+            const dailyContent = document.getElementById('daily-benefit-content');
+            
+            dailyContent.style.animation = 'fadeOut 0.5s forwards';
+            
+            setTimeout(() => {
+                dailyContent.innerHTML = `
+                    <h3>فائدة اليوم</h3>
+                    <p>${dailyBenefits[randomIndex].text}</p>
+                    <p class="benefit-source">- ${dailyBenefits[randomIndex].source}</p>
+                `;
+                dailyContent.style.animation = 'fadeIn 0.5s forwards';
+            }, 500);
+            
+            // تأثير النقر
+            const button = document.querySelector('#daily-benefits button');
+            button.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                button.style.transform = 'scale(1)';
+            }, 100);
+        }
+
+        // دالة للبحث في الأذكار
+        function searchAdhkar() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            const categories = document.querySelectorAll('.category');
+            
+            categories.forEach(category => {
+                const content = category.textContent.toLowerCase();
+                if (content.includes(searchTerm)) {
+                    category.style.display = 'block';
+                    
+                    // تمييز النص المطابق
+                    const paragraphs = category.querySelectorAll('p');
+                    paragraphs.forEach(p => {
+                        const text = p.textContent;
+                        const highlightedText = text.replace(new RegExp(searchTerm, 'gi'), 
+                            match => `<span style="background-color: yellow; color: black;">${match}</span>`);
+                        p.innerHTML = highlightedText;
+                    });
+                    
+                    // التمرير إلى القسم
+                    setTimeout(() => {
+                        category.scrollIntoView({behavior: 'smooth', block: 'start'});
+                    }, 300);
+                } else {
+                    category.style.display = 'none';
+                }
+            });
+        }
+
+        // دالة لإظهار/إخفاء زر البحث
+        function toggleSearch() {
+            const searchContainer = document.getElementById('search-container');
+            searchContainer.style.display = searchContainer.style.display === 'none' ? 'block' : 'none';
+            
+            if (searchContainer.style.display === 'block') {
+                document.getElementById('search-input').focus();
+            }
+        }
+
+        // تحميل فائدة يومية تلقائياً عند فتح الصفحة
+        window.onload = function() {
+            loadDailyBenefit();
+        };
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نَجَاتُكَ بِيَدِكَ</title>
+    <style>
+        /* أنماط الجزء الثالث المضافة */
+        
+        /* أنماط الأدعية الإضافية */
+        .dua-section {
+            margin-top: 2rem;
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            padding: 1.5rem;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .dua-section h3 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .dua-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #333;
+        }
+        
+        .dua-item:last-child {
+            border-bottom: none;
+        }
+        
+        .dua-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #ddd;
+        }
+        
+        .dua-source {
+            color: #3CB371;
+            font-style: italic;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        /* أنماط القوائم المنسدلة */
+        .dropdown {
+            margin: 1.5rem 0;
+        }
+        
+        .dropdown-btn {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            width: 100%;
+            text-align: right;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .dropdown-btn:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .dropdown-btn:after {
+            content: '\25BC';
+            font-size: 0.8rem;
+            transition: var(--transition);
+        }
+        
+        .dropdown-btn.active:after {
+            transform: rotate(180deg);
+        }
+        
+        .dropdown-content {
+            padding: 0 1rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background-color: #222;
+            border-radius: 0 0 5px 5px;
+        }
+        
+        .dropdown-content.show {
+            padding: 1rem;
+            max-height: 1000px;
+        }
+        
+        /* أنماط مشاركة الصفحة */
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .share-btn {
+            background-color: #2E8B57;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .share-btn:hover {
+            background-color: #3CB371;
+            transform: translateY(-3px);
+        }
+        
+        .share-btn.whatsapp { background-color: #25D366; }
+        .share-btn.telegram { background-color: #0088cc; }
+        .share-btn.twitter { background-color: #1DA1F2; }
+        
+        /* أنماط التذييل المعدلة */
+        footer {
+            margin-top: 3rem;
+            padding: 2rem;
+            background-color: var(--dark-color);
+            color: var(--white);
+            font-size: 1rem;
+            border-top: 1px solid #2E8B57;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: #3CB371;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .dua-section {
+                padding: 1rem;
+            }
+            
+            .dropdown-btn {
+                padding: 0.8rem;
+                font-size: 1rem;
+            }
+            
+            .share-buttons {
+                flex-wrap: wrap;
+            }
+            
+            .footer-links {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- الجزء الثالث من المحتوى -->
+    <div class="container">
+        <!-- قسم الأدعية الإضافية -->
+        <div class="category">
+            <h2>أدعية متنوعة</h2>
+            
+            <div class="dua-section">
+                <h3>أدعية الرزق والغنى</h3>
+                
+                <div class="dua-item">
+                    <p class="dua-text">اللهم إني أسألك علماً نافعاً، ورزقاً طيباً، وعملاً متقبلاً</p>
+                    <p class="dua-source">(دعاء مأثور)</p>
+                </div>
+                
+                <div class="dua-item">
+                    <p class="dua-text">اللهم اكفني بحلالك عن حرامك، وأغنني بفضلك عمن سواك</p>
+                    <p class="dua-source">(رواه الترمذي وحسنه)</p>
+                </div>
+                
+                <div class="dua-item">
+                    <p class="dua-text">اللهم رب السماوات السبع ورب العرش العظيم، ربنا ورب كل شيء، فالق الحب والنوى، ومنزل التوراة والإنجيل والفرقان، أعوذ بك من شر كل شيء أنت آخذ بناصيته، اللهم أنت الأول فليس قبلك شيء، وأنت الآخر فليس بعدك شيء، وأنت الظاهر فليس فوقك شيء، وأنت الباطن فليس دونك شيء، اقض عنا الدين وأغننا من الفقر</p>
+                    <p class="dua-source">(رواه مسلم)</p>
+                </div>
+            </div>
+            
+            <div class="dua-section">
+                <h3>أدعية الهم والكرب</h3>
+                
+                <div class="dua-item">
+                    <p class="dua-text">لا إله إلا الله العظيم الحليم، لا إله إلا الله رب العرش العظيم، لا إله إلا الله رب السماوات ورب الأرض ورب العرش الكريم</p>
+                    <p class="dua-source">(رواه البخاري ومسلم)</p>
+                </div>
+                
+                <div class="dua-item">
+                    <p class="dua-text">اللهم إني عبدك وابن عبدك وابن أمتك، ناصيتي بيدك، ماض في حكمك، عدل في قضاؤك، أسألك بكل اسم هو لك سميت به نفسك، أو أنزلته في كتابك، أو علمته أحداً من خلقك، أو استأثرت به في علم الغيب عندك، أن تجعل القرآن ربيع قلبي، ونور صدري، وجلاء حزني، وذهاب همي</p>
+                    <p class="dua-source">(رواه أحمد وصححه الألباني)</p>
+                </div>
+                
+                <div class="dua-item">
+                    <p class="dua-text">الله الله ربي لا أشرك به شيئاً</p>
+                    <p class="dua-source">(دعاء النبي ﷺ عند الكرب)</p>
+                </div>
+            </div>
+            
+            <!-- قوائم منسدلة لأدعية إضافية -->
+            <div class="dropdown">
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">أدعية السفر</button>
+                <div class="dropdown-content">
+                    <div class="dua-item">
+                        <p class="dua-text">سبحان الذي سخر لنا هذا وما كنا له مقرنين، وإنا إلى ربنا لمنقلبون</p>
+                        <p class="dua-source">(رواه مسلم)</p>
+                    </div>
+                    <div class="dua-item">
+                        <p class="dua-text">اللهم إنا نسألك في سفرنا هذا البر والتقوى، ومن العمل ما ترضى، اللهم هون علينا سفرنا هذا واطو عنا بعده، اللهم أنت الصاحب في السفر والخليفة في الأهل</p>
+                        <p class="dua-source">(رواه مسلم)</p>
+                    </div>
+                    <div class="dua-item">
+                        <p class="dua-text">اللهم إني أعوذ بك من وعثاء السفر، وكآبة المنظر، وسوء المنقلب في المال والأهل</p>
+                        <p class="dua-source">(رواه مسلم)</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dropdown">
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">أدعية الاستيقاظ من النوم</button>
+                <div class="dropdown-content">
+                    <div class="dua-item">
+                        <p class="dua-text">الحمد لله الذي أحيانا بعد ما أماتنا وإليه النشور</p>
+                        <p class="dua-source">(رواه البخاري)</p>
+                    </div>
+                    <div class="dua-item">
+                        <p class="dua-text">لا إله إلا الله وحده لا شريك له، له الملك وله الحمد وهو على كل شيء قدير، سبحان الله، والحمد لله، ولا إله إلا الله، والله أكبر، ولا حول ولا قوة إلا بالله العلي العظيم</p>
+                        <p class="dua-source">(رواه أبو داود والترمذي)</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dropdown">
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">أدعية دخول المنزل والخروج منه</button>
+                <div class="dropdown-content">
+                    <div class="dua-item">
+                        <p class="dua-text">بسم الله ولجنا، وبسم الله خرجنا، وعلى الله ربنا توكلنا</p>
+                        <p class="dua-source">(رواه أبو داود)</p>
+                    </div>
+                    <div class="dua-item">
+                        <p class="dua-text">اللهم إني أسألك خير المولج وخير المخرج، بسم الله ولجنا، وبسم الله خرجنا، وعلى الله ربنا توكلنا</p>
+                        <p class="dua-source">(رواه أبو داود)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+</div>
+        <!-- أزرار مشاركة الصفحة -->
+        <div class="share-buttons">
+            <button class="share-btn whatsapp" onclick="sharePage('whatsapp')">
+                <span>مشاركة عبر واتساب</span>
+            </button>
+            <button class="share-btn telegram" onclick="sharePage('telegram')">
+                <span>مشاركة عبر تليجرام</span>
+            </button>
+            <button class="share-btn twitter" onclick="sharePage('twitter')">
+                <span>مشاركة عبر تويتر</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- تذييل الصفحة المعدل -->
+    <footer>
+        </div>
+      
+        <p>  لو استفدت من موقع ادعي للفريق بدعوه طيبه </p>
+        <p>تم التطوير بواسطة: فريق AAAMO</p>
+    </footer>
+
+    <script>
+        // دالة لعرض/إخفاء القوائم المنسدلة
+        function toggleDropdown(btn) {
+            btn.classList.toggle("active");
+            const content = btn.nextElementSibling;
+            content.classList.toggle("show");
+        }
+
+        // دالة لمشاركة الصفحة
+        function sharePage(social) {
+            const title = "نَجَاتُكَ بِيَدِكَ";
+            const url = window.location.href;
+            let shareUrl = "";
+            
+            switch(social) {
+                case 'whatsapp':
+                    shareUrl = `https://wa.me/?text=${encodeURIComponent(title + " " + url)}`;
+                    break;
+                case 'telegram':
+                    shareUrl = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
+                    break;
+            }
+            
+            window.open(shareUrl, '_blank', 'width=600,height=400');
+        }
+
+        // دالة للانتقال السلس للأقسام
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // حفظ التقدم في العدادات
+        function saveCounters() {
+            const counters = document.querySelectorAll('.counter span');
+            const counts = [];
+            
+            counters.forEach(counter => {
+                counts.push(counter.textContent);
+            });
+            
+            localStorage.setItem('adhkarCounts', JSON.stringify(counts));
+        }
+
+        // تحميل العدادات المحفوظة
+        function loadCounters() {
+            const savedCounts = localStorage.getItem('adhkarCounts');
+            
+            if (savedCounts) {
+                const counts = JSON.parse(savedCounts);
+                const counters = document.querySelectorAll('.counter span');
+                
+                counters.forEach((counter, index) => {
+                    if (counts[index]) {
+                        counter.textContent = counts[index];
+                    }
+                });
+            }
+        }
+
+        // تحديث العدادات عند التغيير
+        document.querySelectorAll('.counter button').forEach(button => {
+            button.addEventListener('click', () => {
+                setTimeout(saveCounters, 100);
+            });
+        });
+
+        // تحميل العدادات عند بدء التشغيل
+        window.addEventListener('load', loadCounters);
+
+        // دالة لتسجيل الدخول (وهمية للتوضيح)
+        function showLoginModal() {
+            alert("هذه ميزة توضيحية، سيتم تطويرها بالكامل في النسخة القادمة إن شاء الله");
+        }
+    </script> 
+</body>
+</html>
